@@ -1,0 +1,245 @@
+drop database if exists tienda;
+
+create database tienda;
+
+
+CREATE TABLE productos(
+
+id int primary key,
+
+nombreProdu varchar (20)not null,
+
+fechaCad date not null,
+
+cantidad int not null,
+
+precioUni int not null,
+
+tipoProducto varchar(20)not null
+);
+
+
+
+
+CREATE TABLE detalleFacturas(
+
+id int primary key,
+
+idproducto int foreign key,
+
+idfactura int foreign key,
+
+precioDecimal not null,
+
+cantidad int not null,
+
+valorTotal not null
+);
+
+
+
+CREATE TABLE facturas(
+
+id int primary key,
+
+numFactura int not null,
+
+nombreCliente varchar (20)not null,
+
+cedula varchar (10)not null,
+
+direccion varchar (50)not null,
+
+telefono varchar (10) not null,
+
+ivaDecimal not null,
+
+totalDecimal not null
+);
+
+
+
+CREATE TABLE tipoProducto(
+
+id int primary key,
+
+nombreTipo varchar (10) not null
+);
+
+
+
+
+CREATE TABLE empleados(
+
+id primary key,
+
+idpersona foreign key,
+
+fechaInicio date not null,
+
+sueldo int not null
+);
+
+
+
+
+CREATE TABLE persona(
+
+id int primary key,
+
+nombre int not null,
+
+cedula varchar (10)not null,
+
+direccion varchar (50)not null,
+
+telefono varchar (10) not null
+);
+
+
+
+CREATE TABLE proveedores(
+
+id int primary key,
+
+idpersona foreign key,
+
+ruc varchar (20)not null
+);
+
+
+
+CREATE TABLE cliente(
+
+id primary key,
+
+idpersona foreign key
+);
+
+
+
+CREATE TABLE proveedorProducto(
+
+id int primary key,
+
+id foreign key,
+
+ruc varchar (20)not null
+);
+
+
+
+CREATE TABLE proveedorBodegas(
+
+id primary key,
+
+idbodegas  foreign key,
+
+idproducto  foreign key,
+
+cantidad foreign key
+);
+
+
+
+CREATE TABLE bodega(
+
+id  primary key,
+
+idproducto foreign key
+);
+
+
+
+CREATE TABLE tipoCedula(
+
+id int primary key,
+
+cedula foreign key,
+
+ruc  foreign key
+);
+
+
+
+CREATE TABLE natural (
+
+id int primary key,
+
+cedula  foreign key
+);
+
+
+
+CREATE TABLE juridico(
+
+id int primary key,
+
+ruc varchar (20)not null
+);
+
+
+
+
+
+
+/*INSERCIÓN DE DATOS EN LA BASE                
+
+insert into categorias (nombreProdu,fechaCad,cantidad,
+precioUni,tipoProducto)
+
+values ('cuadernos','o','500'.'1.50','material oficina'),
+('libros','o','200'.'5.00','material oficina'),
+('shampoo','12-12-2019','60 L'.'1.50','material aseo'),
+('cloro','12-12-2020','80 L'.'2.00','material aseo'),
+('martillo','0 ','70'.'1.70','herramientas');
+
+inset to detalleFactura(producto,
+factura,precioDecimal,cantidad,valorTotal)
+
+
+values ('cuadernos','1224568712',2.10.'500','1050'),
+('libros','1234356563',2.40.'500','1060'),
+('shampoo','2345677673',645.'1.50','1290'),
+('cloro','12334566567',130 L.'2.00','250'),
+('martillo','1235567676 ',70.'1.70','119');
+
+
+
+insert into facturaDetalle (numFactura,
+nombreCliente,cedula,
+direccion,telefono,
+ivaDecimal,
+totalDecimal
+)
+
+
+values(1,'DIEGO', '2454332354', 'lucha de los pobres','0212120',10.56,0.65),
+(2,'Luis', 123543223,'calle venzuela',098543212,12,12,0.50),
+(3,'Tito'', '1432465343','calle garcia moreno', '0923434467',12.46.0.46),
+(4,'Xavyr', '1243565655','san juan',0987364834,10.30,0.30),
+(5,'TONY', '15246678789', 'san roque','099234567','21.40','0.40');
+
+
+insert into empleado (idpersona,fechaInicio,sueldo)
+
+VALUES(1,10-12-2018,100,2.60,300),
+(2,11-01-2018,300),
+(3,9-12-2018,'400),
+(4,9-12-2018,300),
+(5,10-12-2018,300);
+
+
+
+INSERT INTO proveedores(
+idpersona,ruc
+);
+
+
+VALUES (1,'123435656'),
+(2,'123435656'),
+(3,'134435656'),
+(4,'1354435656'),
+(5,'156735656');
+
+
